@@ -74,7 +74,7 @@ export const FormNuevoCliente = ({ form, onSumbit }: FormNuevoClienteProps) => {
                     <SelectItem value="f">Femenino</SelectItem>
                   </SelectContent>
                 </Select>
-                <FormMessage className="text-[.6em] ml-auto"/>
+                <FormMessage className="text-[.6em] ml-auto" />
               </FormItem>
             )}
           />
@@ -123,7 +123,7 @@ export const FormNuevoCliente = ({ form, onSumbit }: FormNuevoClienteProps) => {
             name="valor"
             control={form.control}
             render={({ field }) => (
-              <InputProps field={{ ...field }} label="Valor">
+              <InputProps field={{ ...field }} label="Valor" type="number">
                 <span className="font-bold">GTQ</span>
               </InputProps>
             )}

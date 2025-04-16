@@ -1,6 +1,8 @@
+import { newClient } from "@/app/(admin)/actions";
 import { NuevoClienteSchema, nuevoClienteType } from "@/shcemas/auth/registro/nuevo-cliente.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 
 export const useNuevoClienteForm = () => {
   const date = new Date();
@@ -23,11 +25,20 @@ export const useNuevoClienteForm = () => {
     mode: "onChange",
   });
   const onSumbit = async (data: nuevoClienteType) => {
-    console.log("data", data);
-    // Aquí puedes manejar el envío del formulario, como enviar los datos a una API o realizar alguna acción
-    // Por ejemplo, puedes hacer una llamada a una función de registro de cliente
-    // await registerClient(data);
-    // console.log("Cliente registrado:", data);
+    const error = await newClient(data);
+    if (error) {
+      let message = error.message ?? "Ocurrió un error desconocido";
+      if (message.includes("Phone number already registered")) {
+        message = "El número de teléfono ya está registrado por otro usuario";
+      }
+      toast.error(`Error: ${message}`, {
+        position: "top-right",
+      });
+    } else {
+      toast.success("Cliente creado correctamente", {
+        position: "top-right",
+      });
+    }
   };
   return { form, onSumbit, reset: form.reset };
 };

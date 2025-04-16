@@ -6,9 +6,11 @@ import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useNuevoClienteForm } from "@/hooks/registro/nuevoClienteForm.hook";
 import { FormNuevoCliente } from "./form/nuevo-cliente/form-nuevo-cliente";
+import { Loader2 } from "lucide-react";
 
 export function TabsNuevoCliente() {
   const { reset, form, onSumbit } = useNuevoClienteForm();
+  const { isSubmitting } = form.formState;
 
   const tabsArray = [
     { value: "datos-cliente", label: "Datos del Cliente" },
@@ -34,7 +36,16 @@ export function TabsNuevoCliente() {
             <Button variant="outline" onClick={() => reset()}>
               Cancelar
             </Button>
-            <Button form="form-nuevo-cliente">Registrar</Button>
+            <Button form="form-nuevo-cliente" disabled={isSubmitting}>
+              {isSubmitting ? (
+                <div className="flex items-center gap-2">
+                  <Loader2 className="animate-spin" />
+                  <span className="ml-2">Registrando...</span>
+                </div>
+              ) : (
+                "Registrar"
+              )}
+            </Button>
           </CardFooter>
         </Card>
       </TabsContent>
