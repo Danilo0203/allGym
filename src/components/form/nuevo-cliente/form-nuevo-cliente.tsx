@@ -52,7 +52,7 @@ export const FormNuevoCliente = ({ form, onSumbit }: FormNuevoClienteProps) => {
                 <FormControl>
                   <Calendario value={field.value} onChange={field.onChange} />
                 </FormControl>
-                <FormMessage />
+                <FormMessage className="text-[.6em] ml-auto" />
               </FormItem>
             )}
           />
@@ -74,7 +74,7 @@ export const FormNuevoCliente = ({ form, onSumbit }: FormNuevoClienteProps) => {
                     <SelectItem value="f">Femenino</SelectItem>
                   </SelectContent>
                 </Select>
-                <FormMessage />
+                <FormMessage className="text-[.6em] ml-auto"/>
               </FormItem>
             )}
           />
