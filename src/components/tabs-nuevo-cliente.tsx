@@ -7,11 +7,12 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useNuevoClienteForm } from "@/hooks/registro/nuevoClienteForm.hook";
 import { FormNuevoCliente } from "./form/nuevo-cliente/form-nuevo-cliente";
 import { Loader2 } from "lucide-react";
+import { useState } from "react";
 
 export function TabsNuevoCliente() {
-  const { reset, form, onSumbit } = useNuevoClienteForm();
+  const [activeTab, setActiveTab] = useState("datos-cliente");
+  const { reset, form, onSumbit } = useNuevoClienteForm(() => setActiveTab("entrenamiento"));
   const { isSubmitting } = form.formState;
-
   const tabsArray = [
     { value: "datos-cliente", label: "Datos del Cliente" },
     { value: "entrenamiento", label: "Entrenamiento" },
@@ -20,7 +21,7 @@ export function TabsNuevoCliente() {
   ];
 
   return (
-    <Tabs defaultValue="datos-cliente" className="w-full h-full">
+    <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full h-full">
       <TabsList className="grid w-full grid-cols-4">
         {tabsArray.map((tab) => (
           <TabsTrigger key={tab.value} value={tab.value} className="w-full">

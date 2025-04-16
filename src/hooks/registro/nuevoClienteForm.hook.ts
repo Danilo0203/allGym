@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
-export const useNuevoClienteForm = () => {
+export const useNuevoClienteForm = (onSuccess?: () => void) => {
   const date = new Date();
 
   const form = useForm<nuevoClienteType>({
@@ -38,6 +38,7 @@ export const useNuevoClienteForm = () => {
       toast.success("Cliente creado correctamente", {
         position: "top-right",
       });
+      if (onSuccess) onSuccess();
     }
   };
   return { form, onSumbit, reset: form.reset };
