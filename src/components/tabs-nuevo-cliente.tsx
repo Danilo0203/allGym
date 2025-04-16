@@ -18,6 +18,7 @@ export function TabsNuevoCliente() {
     { value: "nutricion", label: "Nutricion" },
     { value: "pagos", label: "Pagos" },
   ];
+
   return (
     <Tabs defaultValue="datos-cliente" className="w-full h-full">
       <TabsList className="grid w-full grid-cols-4">

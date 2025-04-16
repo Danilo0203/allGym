@@ -10,6 +10,8 @@ interface FormNuevoClienteProps {
 }
 
 export const FormNuevoCliente = ({ form, onSumbit }: FormNuevoClienteProps) => {
+  const { isSubmitting } = form.formState;
+
   return (
     <Form {...form}>
       <form
@@ -35,12 +37,14 @@ export const FormNuevoCliente = ({ form, onSumbit }: FormNuevoClienteProps) => {
           <FormField
             name="nombre"
             control={form.control}
-            render={({ field }) => <InputProps field={{ ...field }} label="Nombre" />}
+            render={({ field }) => <InputProps field={{ ...field }} label="Nombre" disabled={isSubmitting} />}
           />
           <FormField
             name="telefono"
             control={form.control}
-            render={({ field }) => <InputProps field={{ ...field }} label="Telefono" type="number" />}
+            render={({ field }) => (
+              <InputProps field={{ ...field }} label="Telefono" type="number" disabled={isSubmitting} />
+            )}
           />
 
           <FormField
@@ -50,7 +54,7 @@ export const FormNuevoCliente = ({ form, onSumbit }: FormNuevoClienteProps) => {
               <FormItem className="bg-accent p-3 rounded-md">
                 <FormLabel>Fecha Nacimiento</FormLabel>
                 <FormControl>
-                  <Calendario value={field.value} onChange={field.onChange} />
+                  <Calendario value={field.value} onChange={field.onChange} disabled={isSubmitting} />
                 </FormControl>
                 <FormMessage className="text-[.6em] ml-auto" />
               </FormItem>
@@ -65,7 +69,7 @@ export const FormNuevoCliente = ({ form, onSumbit }: FormNuevoClienteProps) => {
                 <FormLabel>Sexo</FormLabel>
                 <Select onValueChange={field.onChange} defaultValue={field.value}>
                   <FormControl>
-                    <SelectTrigger className="w-full">
+                    <SelectTrigger className="w-full" disabled={isSubmitting}>
                       <SelectValue placeholder="Seleccion un genero" />
                     </SelectTrigger>
                   </FormControl>
@@ -82,7 +86,7 @@ export const FormNuevoCliente = ({ form, onSumbit }: FormNuevoClienteProps) => {
             name="estatura"
             control={form.control}
             render={({ field }) => (
-              <InputProps field={{ ...field }} type="number" label="Estatura">
+              <InputProps field={{ ...field }} type="number" label="Estatura" disabled={isSubmitting}>
                 <span className="font-bold">CM</span>
               </InputProps>
             )}
@@ -91,7 +95,7 @@ export const FormNuevoCliente = ({ form, onSumbit }: FormNuevoClienteProps) => {
             name="peso"
             control={form.control}
             render={({ field }) => (
-              <InputProps field={{ ...field }} label="Peso" type="number">
+              <InputProps field={{ ...field }} label="Peso" type="number" disabled={isSubmitting}>
                 <span className="font-bold">LBS</span>
               </InputProps>
             )}
@@ -99,7 +103,7 @@ export const FormNuevoCliente = ({ form, onSumbit }: FormNuevoClienteProps) => {
           <FormField
             name="tipoCuerpo"
             control={form.control}
-            render={({ field }) => <InputProps field={{ ...field }} label="Tipo de Cuerpo" />}
+            render={({ field }) => <InputProps field={{ ...field }} label="Tipo de Cuerpo" disabled={isSubmitting} />}
           />
           <FormField
             name="inscripcion"
@@ -108,7 +112,7 @@ export const FormNuevoCliente = ({ form, onSumbit }: FormNuevoClienteProps) => {
               <FormItem className="bg-accent p-3 rounded-md">
                 <FormLabel>Inscripción</FormLabel>
                 <FormControl>
-                  <Calendario value={field.value ?? new Date()} onChange={field.onChange} />
+                  <Calendario value={field.value ?? new Date()} onChange={field.onChange} disabled={isSubmitting} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -117,13 +121,13 @@ export const FormNuevoCliente = ({ form, onSumbit }: FormNuevoClienteProps) => {
           <FormField
             name="plan"
             control={form.control}
-            render={({ field }) => <InputProps field={{ ...field }} label="Plan" />}
+            render={({ field }) => <InputProps field={{ ...field }} label="Plan" disabled={isSubmitting} />}
           />
           <FormField
             name="valor"
             control={form.control}
             render={({ field }) => (
-              <InputProps field={{ ...field }} label="Valor" type="number">
+              <InputProps field={{ ...field }} label="Valor" type="number" disabled={isSubmitting}>
                 <span className="font-bold">GTQ</span>
               </InputProps>
             )}
@@ -135,7 +139,7 @@ export const FormNuevoCliente = ({ form, onSumbit }: FormNuevoClienteProps) => {
               <FormItem className="bg-accent p-3 rounded-md">
                 <FormLabel>Fecha de Inicio</FormLabel>
                 <FormControl>
-                  <Calendario value={field.value ?? new Date()} onChange={field.onChange} />
+                  <Calendario value={field.value ?? new Date()} onChange={field.onChange} disabled={isSubmitting} />
                 </FormControl>
                 <FormMessage />
               </FormItem>

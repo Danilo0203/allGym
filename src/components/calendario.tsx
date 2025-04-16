@@ -7,7 +7,15 @@ import { Input } from "@/components/ui/input";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
-export const Calendario = ({ value, onChange }: { value?: Date; onChange: (date?: Date) => void }) => {
+export const Calendario = ({
+  value,
+  onChange,
+  disabled,
+}: {
+  value?: Date;
+  onChange: (date?: Date) => void;
+  disabled: boolean;
+}) => {
   const [inputValue, setInputValue] = useState(value ? format(value, "dd/MM/yyyy") : "");
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -23,7 +31,7 @@ export const Calendario = ({ value, onChange }: { value?: Date; onChange: (date?
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <Button variant="outline" className="w-full justify-start text-left font-normal">
+        <Button variant="outline" className="w-full justify-start text-left font-normal" disabled={disabled}>
           {value ? format(value, "PPP", { locale: es }) : <span>Selecciona una fecha</span>}
           <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
         </Button>

@@ -8,11 +8,13 @@ export const InputProps = ({
   label,
   children,
   type = "text",
+  disabled = false,
 }: {
   field: ControllerRenderProps;
   label: string;
   children?: React.ReactNode;
   type?: React.HTMLInputTypeAttribute;
+  disabled: boolean;
 }) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (type === "number") {
@@ -29,6 +31,7 @@ export const InputProps = ({
       <div className="flex gap-2 items-center">
         <FormControl>
           <Input
+            disabled={disabled}
             {...field}
             pattern={type === "number" ? "\\d*" : undefined}
             inputMode={type === "number" ? "numeric" : undefined}
