@@ -4,7 +4,7 @@ import React from "react";
 
 export default function RegistroPage() {
   return (
-    <section className="flex flex-col gap-4 h-full">
+    <section className="flex flex-col h-full">
       <TitlePage />
       <TabsNuevoCliente />
     </section>

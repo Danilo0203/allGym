@@ -1,8 +1,9 @@
 import { Calendario } from "@/components/calendario";
-import { FileImage } from "@/components/file-image";
+// import { FileImage } from "@/components/file-image";
 import { InputProps } from "@/components/input-props";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { useNuevoClienteForm } from "@/hooks/registro/nuevoClienteForm.hook";
 interface FormNuevoClienteProps {
   form: ReturnType<typeof useNuevoClienteForm>["form"];
@@ -19,7 +20,7 @@ export const FormNuevoCliente = ({ form, onSumbit }: FormNuevoClienteProps) => {
         onSubmit={form.handleSubmit(onSumbit)}
         id="form-nuevo-cliente"
       >
-        <FormField
+        {/* <FormField
           name="imagenPerfil"
           control={form.control}
           render={() => (
@@ -31,7 +32,7 @@ export const FormNuevoCliente = ({ form, onSumbit }: FormNuevoClienteProps) => {
               <FormMessage />
             </FormItem>
           )}
-        />
+        /> */}
         {/* <FileImage /> */}
         <div className="grow-[2] grid  grid-cols-1 sm:grid-cols-2 gap-4">
           <FormField
@@ -103,7 +104,47 @@ export const FormNuevoCliente = ({ form, onSumbit }: FormNuevoClienteProps) => {
           <FormField
             name="tipoCuerpo"
             control={form.control}
-            render={({ field }) => <InputProps field={{ ...field }} label="Tipo de Cuerpo" disabled={isSubmitting} />}
+            render={({ field }) => (
+              <FormItem className="bg-accent p-3 rounded-md">
+                <FormLabel>Tipo de Cuerpo</FormLabel>
+                <Select onValueChange={field.onChange} defaultValue={field.value}>
+                  <FormControl>
+                    <SelectTrigger className="w-full" disabled={isSubmitting}>
+                      <SelectValue placeholder="Selecciona un tipo de cuerpo" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    <TooltipProvider>
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <SelectItem value="ectomorfo">Ectomorfo</SelectItem>
+                        </TooltipTrigger>
+                        <TooltipContent>
+                          <p>Constitución delgada, extremidades largas y dificultad para ganar masa muscular.</p>
+                        </TooltipContent>
+                      </Tooltip>
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <SelectItem value="mesomorfo">Mesomorfo</SelectItem>
+                        </TooltipTrigger>
+                        <TooltipContent>
+                          <p>Cuerpo atlético, facilidad para ganar músculo y perder grasa.</p>
+                        </TooltipContent>
+                      </Tooltip>
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <SelectItem value="endomorfo">Endomorfo</SelectItem>
+                        </TooltipTrigger>
+                        <TooltipContent>
+                          <p>Tendencia a acumular grasa, metabolismo más lento y dificultad para perder peso.</p>
+                        </TooltipContent>
+                      </Tooltip>
+                    </TooltipProvider>
+                  </SelectContent>
+                </Select>
+                <FormMessage className="text-[.6em] ml-auto" />
+              </FormItem>
+            )}
           />
           <FormField
             name="inscripcion"
@@ -121,7 +162,25 @@ export const FormNuevoCliente = ({ form, onSumbit }: FormNuevoClienteProps) => {
           <FormField
             name="plan"
             control={form.control}
-            render={({ field }) => <InputProps field={{ ...field }} label="Plan" disabled={isSubmitting} />}
+            render={({ field }) => (
+              <FormItem className="bg-accent p-3 rounded-md">
+                <FormLabel>Plan</FormLabel>
+                <Select onValueChange={field.onChange} defaultValue={field.value}>
+                  <FormControl>
+                    <SelectTrigger className="w-full" disabled={isSubmitting}>
+                      <SelectValue placeholder="Seleccion un tipo de plan" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    <SelectItem value="dia">Dia</SelectItem>
+                    <SelectItem value="semanal">Semanal</SelectItem>
+                    <SelectItem value="mensual">Mensual</SelectItem>
+                    <SelectItem value="anual">Anual</SelectItem>
+                  </SelectContent>
+                </Select>
+                <FormMessage className="text-[.6em] ml-auto" />
+              </FormItem>
+            )}
           />
           <FormField
             name="valor"
