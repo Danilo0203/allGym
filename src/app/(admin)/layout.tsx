@@ -6,10 +6,10 @@ import { getUser } from "@/utils/supabase/auth/server";
 import { User } from "@supabase/supabase-js";
 
 export default async function LayoutAdmin({ children }: { children: React.ReactNode }) {
-  const { data } = await getUser();
+  const user = await getUser();
   return (
     <SidebarProvider>
-      <AppSidebar user={data.user ?? ({} as User)} />
+      <AppSidebar user={user ?? ({} as User)} />
       <SidebarInset>
         <header className="flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12">
           <div className="flex items-center gap-2 px-4">
