@@ -5,8 +5,11 @@ import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarRail } fr
 import { NavUser } from "@/components/sidebar/nav-user";
 import Image from "next/image";
 import { dataSidebar } from "./data-sidebar";
-
-export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+import { User } from "@supabase/supabase-js";
+export interface AppSidebarProps extends React.ComponentProps<typeof Sidebar> {
+  user: User; // o define un tipo más específico si lo tienes
+}
+export function AppSidebar({ user, ...props }: AppSidebarProps) {
   return (
     <Sidebar collapsible="icon" {...props}>
       <SidebarHeader className="flex items-center justify-center p-0">
@@ -16,7 +19,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <NavMain items={dataSidebar.navMain} groupLabel="Administración" />
       </SidebarContent>
       <SidebarFooter>
-        <NavUser user={dataSidebar.user} />
+        <NavUser {...user} />
       </SidebarFooter>
       <SidebarRail />
     </Sidebar>
