@@ -60,8 +60,8 @@ export const dataSidebar = {
       icon: Users,
       items: [
         {
-          title: "General",
-          url: "#",
+          title: "Clientes",
+          url: "/clientes/tabla",
         },
         {
           title: "Team",
