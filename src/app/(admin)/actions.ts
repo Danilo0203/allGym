@@ -28,7 +28,7 @@ export async function newClient(formData: nuevoClienteType) {
     });
   }
   if (error) {
-    console.error("Error de Supabase Auth:", error); // <-- añade esto
+    // console.log(error);
     return error;
   }
 }

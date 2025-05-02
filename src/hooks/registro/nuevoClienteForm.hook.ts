@@ -30,19 +30,17 @@ export const useNuevoClienteForm = (onSuccess?: () => void) => {
   const onSumbit = async (data: nuevoClienteType) => {
     const error = await newClient(data);
     if (error) {
-      let message = error.message ?? "Ocurrió un error desconocido";
-      if (message.includes("Phone number already registered")) {
-        message = "El número de teléfono ya está registrado por otro usuario";
+      if (error.message.includes("Phone number already registered by another user")) {
+        toast.error("El número de teléfono ya está registrado por otro usuario", {
+          position: "top-right",
+        });
+      } else {
+        toast.success("Cliente creado correctamente", {
+          position: "top-right",
+        });
+        form.reset();
+        if (onSuccess) onSuccess();
       }
-      toast.error(`Error: ${message}`, {
-        position: "top-right",
-      });
-    } else {
-      toast.success("Cliente creado correctamente", {
-        position: "top-right",
-      });
-      form.reset();
-      if (onSuccess) onSuccess();
     }
   };
   return { form, onSumbit, reset: form.reset };
