@@ -21,6 +21,9 @@ export const useNuevoClienteForm = (onSuccess?: () => void) => {
       plan: undefined, // Valor válido del enum
       valor: undefined, // Valor numérico por defecto
       fechaInicio: date,
+      descuento: 0, // Valor numérico por defecto
+      total: undefined, // Valor numérico por defecto
+      diasPorSemana: undefined, // Valor numérico por defecto
     },
     mode: "onChange",
   });
@@ -38,6 +41,7 @@ export const useNuevoClienteForm = (onSuccess?: () => void) => {
       toast.success("Cliente creado correctamente", {
         position: "top-right",
       });
+      form.reset();
       if (onSuccess) onSuccess();
     }
   };

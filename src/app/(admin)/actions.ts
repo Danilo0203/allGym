@@ -1,10 +1,8 @@
 "use server";
 import { nuevoClienteType } from "@/shcemas/auth/registro/nuevo-cliente.schema";
 import { supabaseAdmin } from "@/utils/supabase/admin";
-
 export async function newClient(formData: nuevoClienteType) {
   const supabase = supabaseAdmin;
-  console.log(formData);
   const { data, error } = await supabase.auth.admin.createUser({
     phone: formData.telefono.toString(),
     password: "gym@2025",
@@ -25,6 +23,8 @@ export async function newClient(formData: nuevoClienteType) {
       plan: formData.plan,
       valor: formData.valor,
       fechaInicio: formData.fechaInicio,
+      descuento: formData.descuento,
+      diasPorSemana: formData.diasPorSemana,
     });
   }
   if (error) {

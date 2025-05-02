@@ -1,13 +1,12 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useNuevoClienteForm } from "@/hooks/registro/nuevoClienteForm.hook";
 import { FormNuevoCliente } from "./form/nuevo-cliente/form-nuevo-cliente";
 import { Loader2 } from "lucide-react";
 import { useState } from "react";
+import { Entrenamiento } from "./views/entrenamiento";
 
 export function TabsNuevoCliente() {
   const [activeTab, setActiveTab] = useState("datos-cliente");
@@ -53,19 +52,12 @@ export function TabsNuevoCliente() {
       </TabsContent>
       <TabsContent value="entrenamiento">
         <Card>
-          <CardHeader>
+          {/* <CardHeader>
             <CardTitle>Password</CardTitle>
             <CardDescription>Change your password here. After saving, youll be logged out.</CardDescription>
-          </CardHeader>
+          </CardHeader> */}
           <CardContent className="space-y-2">
-            <div className="space-y-1">
-              <Label htmlFor="current">Current password</Label>
-              <Input id="current" type="password" />
-            </div>
-            <div className="space-y-1">
-              <Label htmlFor="new">New password</Label>
-              <Input id="new" type="password" />
-            </div>
+            <Entrenamiento />
           </CardContent>
           <CardFooter>
             <Button>Save password</Button>
